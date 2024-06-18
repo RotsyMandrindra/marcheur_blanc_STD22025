@@ -1,4 +1,4 @@
-package hei.school.marcheurblanc;
+package hei.school.marcheurblanc.localisation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +13,8 @@ import java.util.List;
 public class Carte {
     private List<Lieu> lieux;
     private List<Rue> rues;
+    private Lieu depart;
+    private Lieu arrive;
 
     public List<Rue> savoirLesRuesDisponibles(Lieu lieu) {
         List<Rue> rueListe = new ArrayList<>();

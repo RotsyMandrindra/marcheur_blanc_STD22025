@@ -1,4 +1,4 @@
-package hei.school.marcheurblanc;
+package hei.school.marcheurblanc.localisation;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

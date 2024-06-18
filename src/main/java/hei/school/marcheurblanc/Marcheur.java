@@ -1,5 +1,8 @@
 package hei.school.marcheurblanc;
 
+import hei.school.marcheurblanc.localisation.Carte;
+import hei.school.marcheurblanc.localisation.Lieu;
+import hei.school.marcheurblanc.localisation.Rue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,22 +15,10 @@ import java.util.Random;
 public class Marcheur {
     private String nom;
     private List<Lieu> lieuDejaVisite;
-    private Carte carte;
 
-    public Marcheur(String nom, Carte carte) {
+    public Marcheur(String nom) {
         this.nom = nom;
-        this.carte = carte;
         this.lieuDejaVisite = new ArrayList<>();
     }
 
-    public List<Lieu> marcher(Lieu depart, Lieu arrive){
-        Random random = new Random();
-        do{
-            List<Rue> rueDispo = carte.savoirLesRuesDisponibles(depart);
-            Rue choisirUneRue = rueDispo.get(random.nextInt(rueDispo.size()));
-            depart = choisirUneRue.savoirLeLieuAuBoutDeLaRue(depart);
-            lieuDejaVisite.add(depart);
-        }while (!depart.equals(arrive));
-        return lieuDejaVisite;
-    }
 }

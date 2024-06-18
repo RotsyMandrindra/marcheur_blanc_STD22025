@@ -1,6 +1,11 @@
 package hei.school.marcheurblanc;
 
+import hei.school.marcheurblanc.localisation.Carte;
+import hei.school.marcheurblanc.localisation.Lieu;
+import hei.school.marcheurblanc.localisation.Rue;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MarcheurTest {
+    private static final Logger log = LoggerFactory.getLogger(MarcheurTest.class);
+
     @Test
     void test_Bjarni(){
         Lieu HEI = new Lieu("HEI");
@@ -19,15 +26,15 @@ public class MarcheurTest {
         Lieu BoulevardDeLEurope = new Lieu("BoulevardDeLEurope");
         Lieu ESTI = new Lieu("ESTI");
 
-        Rue rue1 = new Rue(HEI, Pullman);
-        Rue rue2 = new Rue(Pullman, nexta);
-        Rue rue3 = new Rue(HEI, sekolintsika);
-        Rue rue4 = new Rue(sekolintsika, marais);
-        Rue rue5 = new Rue(HEI, balancoire);
-        Rue rue6 = new Rue(Pullman, balancoire);
-        Rue rue7 = new Rue(ESTI, balancoire);
-        Rue rue8 = new Rue(balancoire, BoulevardDeLEurope);
-        Rue rue9 = new Rue(BoulevardDeLEurope, ESTI);
+        Rue rue1 = new Rue(HEI, Pullman, "Andriatsihoarana");
+        Rue rue2 = new Rue(Pullman, nexta, "");
+        Rue rue3 = new Rue(HEI, sekolintsika, "");
+        Rue rue4 = new Rue(sekolintsika, marais, "");
+        Rue rue5 = new Rue(HEI, balancoire, "");
+        Rue rue6 = new Rue(Pullman, balancoire, "Ranaivo");
+        Rue rue7 = new Rue(ESTI, balancoire, "");
+        Rue rue8 = new Rue(balancoire, BoulevardDeLEurope, "");
+        Rue rue9 = new Rue(BoulevardDeLEurope, ESTI, "");
 
         List<Lieu> lieux = new ArrayList<>();
         lieux.add(marais);
@@ -49,12 +56,16 @@ public class MarcheurTest {
         rues.add(rue7);
         rues.add(rue8);
 
-        Carte carte = new Carte(lieux, rues);
+        Carte carte = new Carte(lieux, rues, HEI, ESTI);
 
-        Marcheur bjarni = new Marcheur("Bjarni", carte);
+        Marcheur bjarni = new Marcheur("Bjarni");
 
-        List<Lieu> lieus = bjarni.marcher(HEI, ESTI);
+        Marcher marcher = new Marcher(bjarni, carte);
+
+        List<Lieu> lieus = marcher.marcher(HEI, ESTI);
 
         assertEquals(ESTI, lieus.getLast());
+
+        System.out.println(lieus);
     }
 }
