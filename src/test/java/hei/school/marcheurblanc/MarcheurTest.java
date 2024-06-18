@@ -1,19 +1,13 @@
 package hei.school.marcheurblanc;
 
-import hei.school.marcheurblanc.localisation.Carte;
-import hei.school.marcheurblanc.localisation.Lieu;
-import hei.school.marcheurblanc.localisation.Rue;
+import hei.school.marcheurblanc.localisation.*;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MarcheurTest {
-    private static final Logger log = LoggerFactory.getLogger(MarcheurTest.class);
 
     @Test
     void test_Bjarni(){
@@ -36,16 +30,6 @@ public class MarcheurTest {
         Rue rue8 = new Rue(balancoire, BoulevardDeLEurope, "");
         Rue rue9 = new Rue(BoulevardDeLEurope, ESTI, "");
 
-        List<Lieu> lieux = new ArrayList<>();
-        lieux.add(marais);
-        lieux.add(sekolintsika);
-        lieux.add(HEI);
-        lieux.add(balancoire);
-        lieux.add(Pullman);
-        lieux.add(nexta);
-        lieux.add(BoulevardDeLEurope);
-        lieux.add(ESTI);
-
         List<Rue> rues = new ArrayList<>();
         rues.add(rue1);
         rues.add(rue2);
@@ -55,14 +39,23 @@ public class MarcheurTest {
         rues.add(rue6);
         rues.add(rue7);
         rues.add(rue8);
+        rues.add(rue9);
 
-        Carte carte = new Carte(lieux, rues, HEI, ESTI);
+        Map<Lieu, List<Lieu>> environnement = new HashMap<>();
+        environnement.put(Pullman, Arrays.asList(HEI, balancoire, nexta));
+        environnement.put(HEI, Arrays.asList(Pullman, sekolintsika, balancoire));
+        environnement.put(balancoire, Arrays.asList(HEI, Pullman, BoulevardDeLEurope, ESTI));
+        environnement.put(sekolintsika, Arrays.asList(HEI, marais));
+        environnement.put(marais, Arrays.asList(sekolintsika));
+        environnement.put(nexta, Arrays.asList(Pullman));
+        environnement.put(BoulevardDeLEurope, Arrays.asList(balancoire, ESTI));
+        environnement.put(ESTI, Arrays.asList(BoulevardDeLEurope, balancoire));
 
-        Marcheur bjarni = new Marcheur("Bjarni");
+        Environnement environnement1 = new Environnement(environnement);
 
-        Marcher marcher = new Marcher(bjarni, carte);
+        Marcheur bjarni = new Marcheur("Bjarni", environnement1);
 
-        List<Lieu> lieus = marcher.marcher(HEI, ESTI);
+        List<Lieu> lieus = bjarni.marcher(HEI, ESTI);
 
         assertEquals(ESTI, lieus.getLast());
 

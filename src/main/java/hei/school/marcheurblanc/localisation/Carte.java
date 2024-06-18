@@ -16,13 +16,4 @@ public class Carte {
     private Lieu depart;
     private Lieu arrive;
 
-    public List<Rue> savoirLesRuesDisponibles(Lieu lieu) {
-        List<Rue> rueListe = new ArrayList<>();
-        for (Rue rue : this.rues) {
-            if (lieu.equals(rue.getLieu1()) || lieu.equals(rue.getLieu2())) {
-                rueListe.add(rue);
-            }
-        }
-        return rueListe;
-    }
 }

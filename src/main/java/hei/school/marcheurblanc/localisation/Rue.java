@@ -1,6 +1,5 @@
 package hei.school.marcheurblanc.localisation;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,14 +15,5 @@ public class Rue {
         this.lieu1 = lieu1;
         this.lieu2 = lieu2;
         this.nom = nom;
-    }
-
-    public Lieu savoirLeLieuAuBoutDeLaRue(Lieu lieu){
-        if (lieu.equals(lieu1)){
-            return lieu2;
-        }else if (lieu.equals(lieu2)){
-            return lieu1;
-        }
-        return null;
     }
 }
