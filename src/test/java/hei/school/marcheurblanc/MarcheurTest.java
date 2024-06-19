@@ -2,12 +2,16 @@ package hei.school.marcheurblanc;
 
 import hei.school.marcheurblanc.localisation.*;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MarcheurTest {
+
+    private static final Logger log = LoggerFactory.getLogger(MarcheurTest.class);
 
     @Test
     void test_Bjarni(){
@@ -59,6 +63,7 @@ public class MarcheurTest {
 
         assertEquals(ESTI, lieus.getLast());
 
-        System.out.println(lieus);
+        log.info("Path taken by Bjarni : " + lieus);
+
     }
 }
